@@ -265,7 +265,7 @@ class UserInfoAuth(View):
 
 class UserInfoHouses(APIView):
     def get(self, request):
-        house = House.objects.filter(user_id=request.user.id)
+        house = House.objects.filter(user_id=request.user.id).order_by('-create_time')
         instances = HousesSerializers(house, many=True)
         houses_list = []
         for instance in instances.data:

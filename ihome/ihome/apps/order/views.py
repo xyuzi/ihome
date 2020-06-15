@@ -66,8 +66,8 @@ class OrdersView(CreateAPIView, ListAPIView):
     def list(self, request, *args, **kwargs):
         role = self.request.GET.get('role')
 
-        order = Order.objects.filter(user_id=self.request.user.id, ) if role == 'custom' else Order.objects.filter(
-            house_id__in=[house.id for house in House.objects.filter(user_id=request.user.id)])
+        order = Order.objects.filter(user_id=self.request.user.id).order_by('-create_time') if role == 'custom' else Order.objects.filter(
+            house_id__in=[house.id for house in House.objects.filter(user_id=request.user.id)]).order_by('-create_time')
         serializers = self.serializer_class(order, many=True)
         orders = []
         for serializer in serializers.data:
