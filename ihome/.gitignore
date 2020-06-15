@@ -138,7 +138,7 @@ dmypy.json
 cython_debug/
 
 # 添加的忽略文件
-.idea
+.idea/
 logs/*
 *.log
 *.pyc
